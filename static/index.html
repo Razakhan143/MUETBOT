@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUET Assistant - Mehran University Chatbot</title>
+    <link rel="stylesheet" href="/static/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Background - MUET Website Screenshot -->
+    <div class="hero-section"></div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+        <i class="fas fa-comments" id="toggleIcon"></i>
+        <span class="notification-badge" id="notificationBadge">1</span>
+    </button>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <!-- Resize Handle -->
+        <div class="resize-handle" id="resizeHandle"></div>
+        <!-- Chatbot Header -->
+        <div class="chatbot-header">
+            <div class="header-info">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="bot-details">
+                    <h3>MUET Assistant</h3>
+                    <span class="status">
+                        <span class="status-dot"></span>
+                        Online
+                    </span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="clearChat()" title="Clear Chat">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="header-btn" onclick="toggleChatbot()" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chatbot Messages -->
+        <div class="chatbot-messages" id="chatMessages">
+            <!-- Welcome Message -->
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>👋 Welcome to MUET Assistant!</p>
+                    <p>I can help you with information about:</p>
+                    <ul>
+                        <li>🎓 Admissions & Programs</li>
+                        <li>📅 Events & News</li>
+                        <li>🏛️ Departments & Faculty</li>
+                        <li>📋 Circulars & Notices</li>
+                    </ul>
+                    <p>How can I assist you today?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Suggestions -->
+        <div class="quick-suggestions" id="quickSuggestions">
+            <button class="suggestion-btn" onclick="sendSuggestion('What are the admission requirements?')">
+                Admission Requirements
+            </button>
+            <button class="suggestion-btn" onclick="sendSuggestion('Tell me about Computer Science department')">
+                CS Department
+            </button>
+            <button class="suggestion-btn" onclick="sendSuggestion('What are the latest news and events?')">
+                Latest News
+            </button>
+        </div>
+
+        <!-- Chatbot Input -->
+        <div class="chatbot-input">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    placeholder="Type your message..." 
+                    onkeypress="handleKeyPress(event)"
+                    autocomplete="off"
+                >
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
