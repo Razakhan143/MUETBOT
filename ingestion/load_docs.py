@@ -16,6 +16,6 @@ def document_loader(file_path: str):
     
 def pdf_loader():
     print("loading PDF Document")
-    loader=PyMuPDFLoader('data\website_documents\prospectus.pdf')
+    loader=PyMuPDFLoader('data/website_documents/prospectus.pdf')
     documents = loader.load()
     return documents
