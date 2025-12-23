@@ -5,6 +5,7 @@ langchain>=0.1.0
 langchain-core>=0.1.0
 langchain-google-genai>=1.0.1
 langchain-openai>=0.0.5
+langchain-community
 chromadb>=0.4.22
 apscheduler>=3.10.4
 pytz>=2023.3
