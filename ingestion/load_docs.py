@@ -1,4 +1,4 @@
-from langchain_community.document_loaders import TextLoader,PyMuPDFLoader
+from langchain_community.document_loaders import TextLoader,PyMuPDFLoader,WebBaseLoader
 def document_loader(file_path: str):
     try:
         # i="data/website_documents/"+i
@@ -15,7 +15,13 @@ def document_loader(file_path: str):
 
     
 def pdf_loader():
-    print("loading PDF Document")
-    loader=PyMuPDFLoader('data/website_documents/prospectus.pdf')
-    documents = loader.load()
-    return documents
+    try:
+        print("loading PDF Document")
+        loader=PyMuPDFLoader('data/website_documents/prospectus.pdf')
+        documents = loader.load()
+        return documents
+    except Exception as e:
+        print(f"Error in load_docs.py (pdf_loader): {e}")
+        loader=WebBaseLoader('https://github.com/Razakhan143/MUETBOT/blob/main/data/website_documents/prospectus.pdf')
+        documents = loader.load()
+        return documents
