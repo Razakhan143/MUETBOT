@@ -147,7 +147,6 @@ async def fetch_page(url: str):
 # MAIN PIPELINE
 # ============================================================
 async def run_data_extraction_whole(OUTPUT_FILE):
-    OUTPUT_FILE=f"data/website_documents/{OUTPUT_FILE}"
     INPUT_FILE = "data\muet_links.txt"
 
     # ----------------------------

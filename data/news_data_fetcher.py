@@ -117,7 +117,6 @@ async def fetch_all_articles() -> list[dict]:
 # SAVE TO FILE (Optional)
 # ------------------------------------------------------------
 def save_articles(articles, filename="muet_news_data.txt"):
-    filename=f"data/website_documents/{filename}"
     with open(filename, "w", encoding="utf-8") as f:
         for article in articles:
             f.write(f"URL: {article['url']}\n")

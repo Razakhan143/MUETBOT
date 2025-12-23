@@ -31,22 +31,22 @@ scheduler = None
 
 
 # ============================================================
-# Scheduler Job Functions (must be regular functions for APScheduler)
+# Scheduler Job Functions (async functions for AsyncIOScheduler)
 # ============================================================
-def run_data_extraction_job():
-    """Wrapper to run async data extraction in scheduler"""
+async def run_data_extraction_job():
+    """Async wrapper to run data extraction in scheduler"""
     try:
-        asyncio.create_task(data_processing.run_data_extraction_whole(OUTPUT_FILE))
-        print("✅ Data extraction job started")
+        await data_processing.run_data_extraction_whole(OUTPUT_FILE)
+        print("✅ Data extraction job completed")
     except Exception as e:
         print(f"❌ Data extraction job failed: {e}")
 
 
-def run_news_fetch_job():
-    """Wrapper to run async news fetching in scheduler"""
+async def run_news_fetch_job():
+    """Async wrapper to run news fetching in scheduler"""
     try:
-        asyncio.create_task(news_data_fetcher.main(NEWS_FILE))
-        print("✅ News fetch job started")
+        await news_data_fetcher.main(NEWS_FILE)
+        print("✅ News fetch job completed")
     except Exception as e:
         print(f"❌ News fetch job failed: {e}")
 
@@ -87,8 +87,8 @@ async def lifespan(app: FastAPI):
     scheduler.add_job(
         run_news_fetch_job,
         'cron',
-        hour=12,
-        minute=0,
+        hour="12,14,15,17,21",
+        minute=4,
         id='news_fetch_job'
     )
     
