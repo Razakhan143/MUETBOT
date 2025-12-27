@@ -69,7 +69,7 @@ header[data-testid="stHeader"] {{ background: transparent; }}
 
 /* Chat container styling */
 .chat-container {{
-    background: white;
+    background: white !important;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.25);
     overflow: hidden;
@@ -184,6 +184,47 @@ header[data-testid="stHeader"] {{ background: transparent; }}
 }}
 [data-testid="stSidebar"] * {{
     color: black !important;
+}}
+
+/* Chat container background */
+[data-testid="stVerticalBlockBorderWrapper"] > div {{
+    background: white !important;
+    border-radius: 12px;
+}}
+
+[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {{
+    background: white !important;
+}}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:has([data-testid="stChatMessage"]) {{
+    background: white !important;
+    border-radius: 12px;
+}}
+
+/* Scrollable container background */
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {{
+    background: white !important;
+}}
+
+div[data-testid="stVerticalBlockBorderWrapper"] > div[style*="overflow"] {{
+    background: white !important;
+    border-radius: 12px;
+}}
+
+/* Target the scrollable chat container specifically */
+.stMainBlockContainer [data-testid="stVerticalBlockBorderWrapper"] {{
+    background: white !important;
+    border-radius: 12px;
+}}
+
+.stMainBlockContainer [data-testid="column"] [data-testid="stVerticalBlockBorderWrapper"] {{
+    background: white !important;
+    border-radius: 12px;
+}}
+
+/* Fix for fixed height container */
+[data-testid="stVerticalBlockBorderWrapper"] > div > div {{
+    background: white !important;
 }}
 
 /* Style chat messages */
@@ -328,35 +369,35 @@ col1, col2 = st.columns([1.2, 1])
 # ============================================================
 # Left - Hero Section
 # ============================================================
-with col1:
-    st.markdown("""
-        <div class="hero-card">
-            <h1>🎓 Welcome to MUET</h1>
-            <p class="subtitle">Mehran University of Engineering & Technology</p>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">📚</div>
-                    <div class="feature-text">Admissions</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📅</div>
-                    <div class="feature-text">Events</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🏛️</div>
-                    <div class="feature-text">Departments</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">💼</div>
-                    <div class="feature-text">Jobs</div>
-                </div>
-            </div>
-            <p>💬 Chat with our AI Assistant for instant answers!</p>
-            <div class="trademark">
-                Developed with ❤️ by <strong>Raza Khan</strong>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
+# with col1:
+#     st.markdown("""
+#         <div class="hero-card">
+#             <h1>🎓 Welcome to MUET</h1>
+#             <p class="subtitle">Mehran University of Engineering & Technology</p>
+#             <div class="features">
+#                 <div class="feature">
+#                     <div class="feature-icon">📚</div>
+#                     <div class="feature-text">Admissions</div>
+#                 </div>
+#                 <div class="feature">
+#                     <div class="feature-icon">📅</div>
+#                     <div class="feature-text">Events</div>
+#                 </div>
+#                 <div class="feature">
+#                     <div class="feature-icon">🏛️</div>
+#                     <div class="feature-text">Departments</div>
+#                 </div>
+#                 <div class="feature">
+#                     <div class="feature-icon">💼</div>
+#                     <div class="feature-text">Jobs</div>
+#                 </div>
+#             </div>
+#             <p>💬 Chat with our AI Assistant for instant answers!</p>
+#             <div class="trademark">
+#                 Developed with ❤️ by <strong>Raza Khan</strong>
+#             </div>
+#         </div>
+#     """, unsafe_allow_html=True)
 
 # ============================================================
 # Right - Chatbot (Using Native Streamlit Chat)
@@ -377,12 +418,29 @@ with col2:
     """, unsafe_allow_html=True)
     
     # Chat container with scrollable area
-    chat_container = st.container(height=400)
+    chat_container = st.container(height=350, border=True)
+
+    # with chat_container:
+    #     st.markdown(
+    #         """
+    #         <style>
+    #         div[data-testid="stVerticalBlock"] {
+    #             background-color: white;
+    #             padding: 0px;
+    #             border-radius: 0px;
+    #             width: 100%;
+    #         }
+    #         </style>
+    #         """,
+    #         unsafe_allow_html=True
+    #     )
+
     
     with chat_container:
         # Welcome message if no history
         if len(st.session_state.messages) == 0:
             st.markdown("""
+                        
                 <div class="welcome-box">
                     <h4>👋 Welcome to MUET Assistant!</h4>
                     <p>I can help you with:</p>

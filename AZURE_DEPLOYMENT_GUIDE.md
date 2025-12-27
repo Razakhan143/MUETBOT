@@ -246,7 +246,7 @@ az appservice plan create \
 # Create the web app
 az webapp create \
     --name muet-chatbot-app \
-    --resource-group muet-chatbot-rg \
+    --resource-group muet-chatbot-rg \ 
     --plan muet-chatbot-plan \
     --runtime "PYTHON:3.11"
 ```
