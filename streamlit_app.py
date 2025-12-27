@@ -419,7 +419,6 @@ with col2:
     
     # Chat container with scrollable area
     chat_container = st.container(height=350, border=True)
-
     # with chat_container:
     #     st.markdown(
     #         """
