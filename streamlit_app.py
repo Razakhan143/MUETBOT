@@ -56,10 +56,19 @@ else:
 # Custom CSS
 # ============================================================
 st.markdown(f"""
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {{ font-family: 'Poppins', sans-serif; }}
+* {{ 
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}}
+
+html, body {{
+    overflow-x: hidden;
+    width: 100%;
+}}
 
 .stApp {{ {bg_style} }}
 
@@ -290,6 +299,137 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div[style*="overflow"] {{
     background: linear-gradient(135deg, #003366, #002147) !important;
     transform: translateY(-1px);
 }}
+
+/* ============================================ */
+/* MOBILE RESPONSIVE STYLES */
+/* ============================================ */
+
+/* Make columns stack on mobile */
+@media (max-width: 768px) {{
+    /* Full width container on mobile */
+    .block-container {{
+        padding: 0.5rem 1rem !important;
+        max-width: 100% !important;
+    }}
+    
+    /* Stack columns vertically */
+    [data-testid="stHorizontalBlock"] {{
+        flex-direction: column !important;
+    }}
+    
+    /* Make each column full width */
+    [data-testid="stColumn"] {{
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }}
+    
+    /* Chat header adjustments */
+    .chat-header {{
+        padding: 10px 12px;
+        margin: -0.5rem -1rem 0.5rem -1rem;
+    }}
+    
+    .chat-header-avatar {{
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }}
+    
+    .chat-header-info h3 {{
+        font-size: 13px;
+    }}
+    
+    /* Welcome box mobile */
+    .welcome-box {{
+        padding: 15px;
+    }}
+    
+    .welcome-box h4 {{
+        font-size: 16px;
+    }}
+    
+    .welcome-box p,
+    .welcome-box li {{
+        font-size: 12px;
+    }}
+    
+    /* Chat messages mobile */
+    [data-testid="stChatMessage"] {{
+        padding: 8px !important;
+        margin-bottom: 6px;
+    }}
+    
+    /* Quick buttons smaller on mobile */
+    .stButton > button {{
+        font-size: 10px !important;
+        padding: 6px 10px !important;
+    }}
+    
+    /* Chat input mobile */
+    [data-testid="stChatInput"] {{
+        padding: 0 !important;
+    }}
+    
+    [data-testid="stChatInput"] textarea {{
+        font-size: 14px !important;
+    }}
+    
+    /* Hide sidebar toggle button space */
+    header[data-testid="stHeader"] {{
+        display: none !important;
+    }}
+}}
+
+/* Extra small devices */
+@media (max-width: 480px) {{
+    .block-container {{
+        padding: 0.25rem 0.5rem !important;
+    }}
+    
+    .chat-header {{
+        padding: 8px 10px;
+    }}
+    
+    .chat-header-avatar {{
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }}
+    
+    .chat-header-info h3 {{
+        font-size: 12px;
+    }}
+    
+    .chat-header-status {{
+        font-size: 10px;
+    }}
+    
+    .welcome-box {{
+        padding: 12px;
+    }}
+    
+    .welcome-box h4 {{
+        font-size: 14px;
+    }}
+    
+    .welcome-box ul {{
+        padding-left: 16px;
+    }}
+    
+    .stButton > button {{
+        font-size: 9px !important;
+        padding: 5px 8px !important;
+        border-radius: 15px !important;
+    }}
+}}
+
+/* Tablet landscape */
+@media (min-width: 769px) and (max-width: 1024px) {{
+    .block-container {{
+        padding: 1rem 2rem !important;
+    }}
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -362,9 +502,10 @@ def clear_chat():
     st.session_state.messages = []
 
 # ============================================================
-# Layout
+# Layout - Responsive columns
 # ============================================================
-col1, col2 = st.columns([1.2, 1])
+# Use single column layout that's centered
+_, col2, _ = st.columns([0.5, 2, 0.5])
 
 # ============================================================
 # Left - Hero Section
